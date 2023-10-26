@@ -21,8 +21,7 @@ lanzamiento de promociones de liquidación de stock.
 La empresa pone a disposición la tabla de Excel a un grupo de programadores con la finalidad de que le
 ayuden a procesar la información de la misma.
 
-#### Enunciado: 
-
+### Enunciado: 
 Realizar una aplicación informática que lea un archivo CSV (se comparte Excel también) que brinda la
 empresa y por línea de comandos permita la visualización de la siguiente información:
 1. Cantidad total de artículos diferentes.
@@ -49,13 +48,11 @@ Argumentos posibles:
 - stock [nombre_articulo],[depósito] El stock del artículo en un depósito.
 - max_Stock [n] Listado de aquellos artículos cuyo stock es igual o supera el número n.
 
-#### Objetivo: 
-
+### Objetivo: 
 Ejercitar y afianzar el uso de estructuras y algoritmos de datos mediante una aplicación concisa y de uso
 general.
 
-#### Formas de presentación: 
-
+### Formas de presentación: 
 Exposición y defensa del programa e informe con código fuente y comentarios. Los
 integrantes del grupo deben conocer, exponer y defender por igual cualquier parte del
 código así como también todas las estructuras y algoritmos desarrollados durante en el
