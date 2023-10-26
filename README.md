@@ -1,13 +1,13 @@
 # PROGRAMACIÓN III
 Repositorio para la materia de Programación_3. De la Universidad Católica de Córdoba
 
-###integrantes:
+### integrantes:
 + Nicolás, Tobias Valentín.
 + Velásquez Borda, Mateo Josué.
 + Venica Ortiz, Pablo Emiliano.
 
-##PARCIAL 2
-###Introducción:
+## PARCIAL 2
+### Introducción:
 Una empresa Argentina realiza diariamente el Inventario Físico de una gran diversidad de productos con
 diferentes códigos de QR y en diferentes depósitos. El software de escaneo que se usa en el inventariado físico,
 lamentablemente, es muy elemental y arroja una tabla de Excel de infinidad de filas que resultan humanamente
