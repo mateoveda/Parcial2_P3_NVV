@@ -2,9 +2,9 @@
 Repositorio para la materia de Programación_3. De la Universidad Católica de Córdoba
 
 ### integrantes:
-+ Nicolás, Tobias Valentín.
-+ Velásquez Borda, Mateo Josué.
-+ Venica Ortiz, Pablo Emiliano.
++ Nicolás, Tobias Valentín. (2215878)
++ Velásquez Borda, Mateo Josué. (2214715)
++ Venica Ortiz, Pablo Emiliano. (2000668)
 
 ## PARCIAL 2
 ### Introducción:
@@ -47,12 +47,15 @@ Argumentos posibles:
 - min_stock [n],[deposito] Listado de artículos con cantidad n o menos de stock según un depósito.
 - stock [nombre_articulo] El stock total del artículo ingresado como argumento.
 - stock [nombre_articulo],[depósito] El stock del artículo en un depósito.
--max_Stock [n] Listado de aquellos artículos cuyo stock es igual o supera el número n.
+- max_Stock [n] Listado de aquellos artículos cuyo stock es igual o supera el número n.
 
 #### Objetivo: 
+
 Ejercitar y afianzar el uso de estructuras y algoritmos de datos mediante una aplicación concisa y de uso
 general.
+
 #### Formas de presentación: 
+
 Exposición y defensa del programa e informe con código fuente y comentarios. Los
 integrantes del grupo deben conocer, exponer y defender por igual cualquier parte del
 código así como también todas las estructuras y algoritmos desarrollados durante en el
