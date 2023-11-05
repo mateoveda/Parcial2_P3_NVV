@@ -15,21 +15,17 @@ struct Node {
 
 Lista<Node> dataList;
 
-void insertData(const string& grupos, const string& nombres, const string& ids) {
-    Node newNode;
+//Declaracion de funciones
+void printStock();
+void insertData(const string& grupos, const string& nombres, const string& ids);
 
-    newNode.grupos.put(stoi(grupos));  // stoi convierte string a int
-    newNode.nombres.put(nombres);
-    newNode.ids.put(ids);
-    dataList.insertarUltimo(newNode);
-}
 
 int main() {
     ifstream file(NOMBRE_ARCHIVO);
     if (!file.is_open()) {
-        cerr << "No se pudo abrir el archivo." << endl;
+        cerr << "\nNo se pudo abrir el archivo." << endl;
         return 1;
-    }    else{cout<<"Archivo abierto.";}
+    }    else{cout<<"\nArchivo abierto.";}
 
     string line;
     getline(file, line);  // Leer la primera línea que contiene encabezados (grupos,nombres,id)
@@ -49,5 +45,33 @@ int main() {
     // estan los datos en la lista dataList, cada nodo contiene un árbol para grupos, nombres e IDs
     // ya esta todo preparado para realizar operaciones con estos datos.
 
+    printStock(); //FUNCION EXCLUSIVA PARA PRUEBA. BORRAR CUANDO NO HAGA FALTA
+
     return 0;
+}
+
+void insertData(const string& grupos, const string& nombres, const string& ids) {
+    Node newNode;
+
+    newNode.grupos.put(stoi(grupos));  // stoi convierte string a int
+    newNode.nombres.put(nombres);
+    newNode.ids.put(ids);
+    dataList.insertarUltimo(newNode);
+}
+
+void printStock(){
+    // Accediendo a los datos guardados en dataList
+    for (int i = 0; i < dataList.getTamanio(); ++i) {
+        Node nodoActual = dataList.getDato(i);
+
+        // Accediendo al arbol del nodoActual
+        cout << "\n\nGrupo: ";
+        nodoActual.grupos.inorder();
+
+        cout << "Nombre: ";
+        nodoActual.nombres.inorder();
+
+        cout << "ID: ";
+        nodoActual.ids.inorder();
+    }
 }
