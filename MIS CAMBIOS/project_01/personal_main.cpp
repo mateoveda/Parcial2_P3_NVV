@@ -25,7 +25,7 @@ void insertData(const string& grupos, const string& nombres, const string& ids) 
 }
 
 int main() {
-    ifstream file("datos.csv");
+    ifstream file("output/datos.csv");
     if (!file.is_open()) {
         cerr << "No se pudo abrir el archivo." << endl;
         return 1;
