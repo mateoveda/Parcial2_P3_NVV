@@ -4,7 +4,7 @@
 #include <string>
 #include "lista.h"
 #include "arbol.h"
-
+#define NOMBRE_ARCHIVO "C:/Users/Usuario/Desktop/Parcial2_P3_NVV/MIS CAMBIOS/project_01/output/datos.csv"
 using namespace std;
 
 struct Node {
@@ -25,11 +25,11 @@ void insertData(const string& grupos, const string& nombres, const string& ids) 
 }
 
 int main() {
-    ifstream file("output/datos.csv");
+    ifstream file(NOMBRE_ARCHIVO);
     if (!file.is_open()) {
         cerr << "No se pudo abrir el archivo." << endl;
         return 1;
-    }
+    }    else{cout<<"Archivo abierto.";}
 
     string line;
     getline(file, line);  // Leer la primera línea que contiene encabezados (grupos,nombres,id)
