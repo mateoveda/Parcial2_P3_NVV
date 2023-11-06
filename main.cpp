@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Lista.h"
+#include "Cola.h"
 #include "ArbolBinario.h"
 #define fore(i,a,b) for(int i=a; i<b; i++)
 using namespace std;
@@ -16,7 +16,7 @@ Analisis de la 2:
 pida los datos del articulo y en base a eso devuelva la cantidad de articulos totales (trampa del profe)
 Tiene que recorrer todo, no es un while.
 
-Analisi de la 3:
+Analisis de la 3:
 ver cual es el minimo
 void, que literalmente saca el listado (recorre todo)
 hay que tener cuidado en sumar articulos que estan agregados dos veces.
@@ -27,8 +27,20 @@ funcion entera, que simplemente retorne una suma;
 analisis de la 5:
 funcion 
 
+CONSIDERACIONES:
+1. Puede ser que haya dos articulos repetidos, para ese caso hay que crear una función que los unifique
+respetando las cantidades de cada uno (sume por deposito).
+2. Hay que tener un protocolo por si es un error, el articulo. (Mismo comportamiento que busqueda de articulos)
+3. hay que ver como hacemos el indice.
+4. hay que armar el algoritmo para que se ordene solito el arbol.
 
 */ 
+
+struct Producto{
+    string nombre;
+    string codigo;
+    Cola<int> depositos;
+};
 
 void menu();
 
@@ -47,8 +59,9 @@ int StockindividualporDeposito();
 void buscarPorMinimoStock();
 
 int main(){
-    Lista<ArbolBinario<int>> lista;
+    ArbolBinario<Producto> productos;
     menu();
+    
 }
 
 void menu(){
@@ -74,7 +87,7 @@ void menu(){
         break;
         
     case '3'://Ver el listado de articulos que estan en el minimo de stock.
-        cout<<"Listado de articulos que están en el miimo de stock:\n";
+        cout<<"Listado de articulos que están en el minimo de stock:\n";
         minimoStock();
         break;
 
@@ -103,3 +116,4 @@ void menu(){
         break;
     } 
 }
+//
