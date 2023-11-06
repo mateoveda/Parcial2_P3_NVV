@@ -270,7 +270,7 @@ void ArbolProducto::preorder(NodoProducto *r)
     return;
   }
 
-  std::cout << r->getNombre() << " ";
+  r -> printNodo();
   preorder(r->getLeft());
   preorder(r->getRight());
 }
@@ -294,7 +294,7 @@ void ArbolProducto::inorder(NodoProducto *r)
   }
 
   inorder(r->getLeft());
-  std::cout << r->getNombre() << " ";
+  r -> printNodo();
   inorder(r->getRight());
 }
 
@@ -318,7 +318,7 @@ void ArbolProducto::postorder(NodoProducto *r)
 
   postorder(r->getLeft());
   postorder(r->getRight());
-  std::cout << r->getNombre() << " ";
+  r-> printNodo();
 }
 
 /**
