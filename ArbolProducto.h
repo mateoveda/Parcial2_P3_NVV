@@ -4,7 +4,7 @@ class ArbolProducto{
 protected:
   NodoProducto *root;
 private:
-  Producto search(Producto dato, NodoProducto *r);
+  string search(Producto dato, NodoProducto *r);
   bool searchB(Producto dato, NodoProducto *r);
   NodoProducto *put(Producto dato, NodoProducto *r);
   NodoProducto *remove(Producto dato, NodoProducto *r);
@@ -64,7 +64,7 @@ ArbolProducto::~ArbolProducto() {}
  */
 string ArbolProducto::search(Producto dato) {
 
-  return search(dato.nombre,root);
+  return search(dato,root);
 }
 
 /**
@@ -84,17 +84,17 @@ string ArbolProducto::search(Producto dato) {
  * @param clave Valor a buscar
  * @return el valor buscado
  */
- T ArbolProducto::search(Producto dato, NodoProducto *r) {
+ string ArbolProducto::search(Producto dato, NodoProducto *r) {
   
   if(r==nullptr){
     throw 404;//condicion base, si llego a esto que te tire un error
   }
 
-  if(r->getDato()==dato){
-    return r->getDato();
+  if(r->getNombre()==dato.nombre){
+    return r->getNombre();
   }
 
-  if(r->getDato()>dato){
+  if(r->getNombre()>dato.nombre){
     return(search(dato, r->getLeft()));
   }
 
@@ -110,17 +110,17 @@ string ArbolProducto::search(Producto dato) {
  * @return true o false
  */
  
-bool ArbolProducto::searchB(T dato, NodoProducto *r) {
+bool ArbolProducto::searchB(Producto dato, NodoProducto *r) {
   
   if(r==nullptr){
     return false;;//condicion base, si llego a esto que te tire un error
   }
 
-  if(r->getDato()==dato){
+  if(r->getNombre()==dato.nombre){
     return true;
   }
 
-  if(r->getDato()>dato){
+  if(r->getNombre()>dato.nombre){
     return(searchB(dato, r->getLeft()));
   }
 
@@ -134,7 +134,7 @@ bool ArbolProducto::searchB(T dato, NodoProducto *r) {
  * @param clave Clave para agregar el dato
  * @param dato Dato a agregar
  */
- void ArbolProducto::put(T dato) {
+ void ArbolProducto::put(Producto dato) {
   root=put(dato, root);
 }
 
@@ -145,19 +145,19 @@ bool ArbolProducto::searchB(T dato, NodoProducto *r) {
  */
 
 
-NodoProducto *ArbolProducto::put(T dato, NodoProducto *r)
+NodoProducto *ArbolProducto::put(Producto dato, NodoProducto *r)
 {
   if (r == nullptr)
   {
     return new NodoProducto(dato);
   }
 
-  if (r->getDato() == dato)
+  if (r->getNombre() == dato.nombre)
   {
     throw 200;
   }
 
-  if (r->getDato() > dato)
+  if (r->getNombre() > dato.nombre)
   {
     r->setLeft(put(dato, r->getLeft()));
   }
@@ -176,12 +176,12 @@ NodoProducto *ArbolProducto::put(T dato, NodoProducto *r)
  * @param clave Clave para identificar el nodo a borrar
  */
 
-void ArbolProducto::remove(T dato){
+void ArbolProducto::remove(Producto dato){
   root = remove(dato, root);
 }
 
 
-NodoProducto *ArbolProducto::remove(T dato, NodoProducto *r)
+NodoProducto *ArbolProducto::remove(Producto dato, NodoProducto *r)
 {
   NodoProducto *aux;
 
@@ -190,7 +190,7 @@ NodoProducto *ArbolProducto::remove(T dato, NodoProducto *r)
     throw 404;
   }
 
-  if (r->getDato() == dato)
+  if (r->getNombre() == dato.nombre)
   {
 
     if (r->getLeft() == nullptr && r->getRight() == nullptr)
@@ -230,7 +230,7 @@ NodoProducto *ArbolProducto::remove(T dato, NodoProducto *r)
       return aux;
     }
   }
-  else if (r->getDat() > dato)
+  else if (r->getNombre() > dato.nombre)
   {
     r->setLeft(remove(dato, r->getLeft()));
   }
@@ -243,28 +243,6 @@ NodoProducto *ArbolProducto::remove(T dato, NodoProducto *r)
 }
 
 
-
-
-NodoProducto *ArbolProducto::findMaxAndRemove(NodoProducto *r, bool *found)
-{
-  NodoProducto ret;
-  *found = false;
-
-  if (r->getRight() == nullptr)
-  {
-    *found = true;
-    return r;
-  }
-
-  ret = findMaxAndRemove(r->getRight(), found);
-  if (*found)
-  {
-    r->setRight(ret);
-    *found = false;
-  }
-
-  return ret;
-}
 
 /**
  * Informa si un árbol esta vacío
@@ -292,7 +270,7 @@ void ArbolProducto::preorder(NodoProducto *r)
     return;
   }
 
-  std::cout << r->getDato() << " ";
+  std::cout << r->getNombre() << " ";
   preorder(r->getLeft());
   preorder(r->getRight());
 }
@@ -316,7 +294,7 @@ void ArbolProducto::inorder(NodoProducto *r)
   }
 
   inorder(r->getLeft());
-  std::cout << r->getDato() << " ";
+  std::cout << r->getNombre() << " ";
   inorder(r->getRight());
 }
 
@@ -340,7 +318,7 @@ void ArbolProducto::postorder(NodoProducto *r)
 
   postorder(r->getLeft());
   postorder(r->getRight());
-  std::cout << r->getDato() << " ";
+  std::cout << r->getNombre() << " ";
 }
 
 /**
@@ -350,7 +328,7 @@ void ArbolProducto::postorder(NodoProducto *r)
 void ArbolProducto::print()
 {
   if (root != NULL)
-    root->print(false, "");
+    root->printNodo();
 }
 
  
