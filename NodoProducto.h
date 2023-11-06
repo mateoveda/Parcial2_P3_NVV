@@ -27,35 +27,69 @@ public:
     right = nullptr;
   }
 
-  T getDato() const
+  Producto getDato() const
   {
     return dato;
   }
-
-  void setDato(T d)
-  {
-    this->dato = d;
+  
+  string getNombre() const{
+    return this-> dato.nombre;
   }
 
-  NodoArbol *getRight() const
+  string getCodigo() const{
+    return this -> dato.codigo;
+  }
+
+  int getStocktotal(){
+    int suma = 0;
+    int auxi;
+    Cola<int> aux;
+    while(!dato.depositos.esVacia()){
+        auxi = dato.depositos.desencolar();
+        suma += auxi;
+        aux.encolar(auxi);
+    }
+    while(!aux.esVacia()){
+        dato.depositos.encolar(aux.desencolar());
+    }
+    return suma;
+  }
+
+  void setDato(Producto d)
+  {
+    this->dato.nombre = d.nombre;
+    this->dato.codigo = d.codigo;
+    while(!d.depositos.esVacia()){
+        this->dato.depositos.encolar(d.depositos.desencolar());
+    }
+  }
+
+  NodoProducto *getRight() const
   {
     return right;
   }
 
-  void setRight(NodoArbol *r)
+  void setRight(NodoProducto *r)
   {
     this->right = r;
   }
-  NodoArbol *getLeft() const
+  NodoProducto *getLeft() const
   {
     return left;
   }
 
-  void setLeft(NodoArbol *l)
+  void setLeft(NodoProducto *l)
   {
     this->left = l;
   }
 
+  void printNodo(){
+    cout<<"Nombre: "<<this->getNombre()<<"\n";
+    cout<<"Codigo: "<<this->getCodigo()<<"\n";
+    cout<<"Stock total: "<<this->getStocktotal()<<"\n";
+
+  }
+/*
    void print(bool esDerecho, string identacion) {
     if (right != NULL) {
         right->print(true, identacion + (esDerecho ? "     " : "|    "));
@@ -72,5 +106,5 @@ public:
         left->print(false, identacion + (esDerecho ? "|    " : "     "));
     }
 }
-
+*/
   };
