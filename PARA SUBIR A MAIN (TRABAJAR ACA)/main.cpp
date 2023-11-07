@@ -46,7 +46,7 @@ void insertRecognitionTree(ArbolProducto& arbol) {
             columnas.push_back(columna);
         }
 
-        // Las primeras dos columnas son strings
+        // Las primeras columnas son strings
         string columna2 = columnas[1];
         string columna3 = columnas[2];
 
