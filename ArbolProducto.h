@@ -16,6 +16,7 @@ private:
   int stock(NodoProducto* raiz, const std::string& nombreProducto);
   int obtenerDeposito(NodoProducto* nodo, const std::string& nombreProducto, int numDeposito);
   void max_stock(NodoProducto* nodo, int n);
+  void minStockDepo(NodoProducto* nodo, int n, int depo);
 
 public:
   ArbolProducto();
@@ -49,6 +50,8 @@ public:
   int ObtenerDeposito(const std::string& nombreProducto, int numDeposito);
 
   void maxStock(int n);
+
+  void minStockDeposito(int n, int depo);
 
 };
 
@@ -354,7 +357,7 @@ int ArbolProducto::ObtenerDeposito(const std::string& nombreProducto, int numDep
 }
 
 
-int obtenerDeposito(NodoProducto* nodo, const std::string& nombreProducto, int numDeposito) {
+int ArbolProducto::obtenerDeposito(NodoProducto* nodo, const std::string& nombreProducto, int numDeposito) {
     if (nodo == nullptr) {
         return -1; // Retorna -1 si no se encontró el producto
     }
@@ -407,4 +410,21 @@ void ArbolProducto::max_stock(NodoProducto* nodo, int n) {
 
     max_stock(nodo->getLeft(), n);
     max_stock(nodo->getRight(), n);
+}
+
+void ArbolProducto::minStockDeposito(int n, int depo){
+  minStockDepo(root,n,depo);
+}
+
+void ArbolProducto::minStockDepo(NodoProducto* nodo, int n, int depo){
+  if (nodo == nullptr)
+  {
+    return;
+  }
+
+  inorder(nodo->getLeft());
+  if(nodo->getStockdeposito(depo)<n+1){
+    nodo -> printNodo();
+  }
+  inorder(nodo->getRight());
 }
