@@ -203,19 +203,33 @@ void menu(ArbolProducto& arbol){
 
     case '4'://Listado de articulos que estan en el minimo de stock y por deposito.
         cout<<"Listado de articulos que estan en el minimo de stock y por deposito:\n";
-        minimoStockPorDeposito(arbol);
+        //minimoStockPorDeposito(arbol);
         break;
 
     case '5'://Stock individual de cada articulo.
+        string nombr =" ";
+        cout<<"Dar el nombre del producto\n";
+        cin>>nombr;
         cout<<"Stock individual de cada articulo\n";
+        arbol.Stocks(nombr);
         break;
 
     case '6'://Stock individual de cada articulo segun deposito.
-        cout<<"Stock individual de cada articulo segun deposito\n";
+        string nombr;
+        int deposito = 0;
+        cout<<"Introducir el nombre del deposito:\n";
+        cin>>nombr;
+        cout<<"Introducir el numero de deposito\n";
+        cin>>deposito;
+        cout<<"Stock individual de cada articulo segun deposito es: "<< arbol.ObtenerDeposito(nombr, deposito);
         break; 
 
     case '7'://Los articulos que igualan o superen determinada cantidad en stock.
+        int n;
+        cout<<"Introducir el valor de la cantidad de stock que busca que los articulos superen: ";
+        cin>>n;
         cout<<"Los articulos que igualan o superen determinada cantidad de stock\n";
+        arbol.maxStock(n);
         break;
 
     case '8'://Salir.

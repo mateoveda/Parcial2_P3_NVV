@@ -13,6 +13,9 @@ private:
   int total_art(NodoProducto* r);
   int contarNodos(NodoProducto* r);
   void min_stock(NodoProducto* nodo, int n);
+  int stock(NodoProducto* raiz, const std::string& nombreProducto);
+  int obtenerDeposito(NodoProducto* nodo, const std::string& nombreProducto, int numDeposito);
+  void max_stock(NodoProducto* nodo, int n);
 
 public:
   ArbolProducto();
@@ -40,6 +43,12 @@ public:
   int contarnodos();
 
   void minStock(int n);
+
+  int Stocks(const std::string& nombreProducto);
+
+  int ObtenerDeposito(const std::string& nombreProducto, int numDeposito);
+
+  void maxStock(int n);
 
 };
 
@@ -314,4 +323,88 @@ void ArbolProducto::min_stock(NodoProducto* nodo, int n) {
     min_stock(nodo->getRight(), n);
 }
 
+int ArbolProducto::Stocks(const std::string& nombreProducto){
+  return stock(root, nombreProducto);
+}
 
+int ArbolProducto::stock(NodoProducto* raiz, const std::string& nombreProducto) {
+    if (raiz == nullptr) {
+        return 0;  // Si el árbol está vacío, retorna 0
+    }
+
+    // Realiza un recorrido en el árbol para encontrar el nodo con el nombre de producto especificado
+    while (raiz != nullptr) {
+        if (nombreProducto == raiz->getNombre()) {
+            // Si se encuentra el producto, se suma el valor de sus depósitos
+            return raiz->getStocktotal();
+        } else if (nombreProducto < raiz->getNombre()) {
+            raiz = raiz->getLeft();  // Se mueve hacia el subárbol izquierdo
+        } else {
+            raiz = raiz->getRight();  // Se mueve hacia el subárbol derecho
+        }
+    }
+
+    // Si no se encuentra el producto, se retorna 0
+    return 0;
+}
+
+
+int ArbolProducto::ObtenerDeposito(const std::string& nombreProducto, int numDeposito){
+  return obtenerDeposito(root, nombreProducto, numDeposito);
+}
+
+
+int obtenerDeposito(NodoProducto* nodo, const std::string& nombreProducto, int numDeposito) {
+    if (nodo == nullptr) {
+        return -1; // Retorna -1 si no se encontró el producto
+    }
+
+    if (nodo->getNombre() == nombreProducto) {
+        Producto producto = nodo->getDato();
+        Cola<int> depositos = producto.depositos;
+        int tamaño = 0;
+
+        // Recorremos la cola para encontrar el depósito deseado
+        int depSeleccionado = -1;
+        bool encontrado = false;
+
+        while (!depositos.esVacia() && tamaño < numDeposito) {
+            depSeleccionado = depositos.desencolar();
+            depositos.encolar(depSeleccionado);
+            tamaño++;
+            encontrado = true;
+        }
+
+        if (encontrado && tamaño == numDeposito) {
+            return depSeleccionado;
+        } else {
+            return -1; // El número de depósito excede la cantidad de depósitos del producto
+        }
+    }
+
+    // Búsqueda en los subárboles izquierdo y derecho
+    int resultadoIzquierdo = obtenerDeposito(nodo->getLeft(), nombreProducto, numDeposito);
+    if (resultadoIzquierdo != -1) {
+        return resultadoIzquierdo;
+    }
+
+    int resultadoDerecho = obtenerDeposito(nodo->getRight(), nombreProducto, numDeposito);
+    return resultadoDerecho;
+}
+
+void ArbolProducto::maxStock(int n){
+  return max_stock(root, n);
+}
+
+void ArbolProducto::max_stock(NodoProducto* nodo, int n) {
+    if (nodo == nullptr) {
+        return;
+    }
+
+    if (nodo->getStocktotal() >= n) {
+        nodo->printNodo();
+    }
+
+    max_stock(nodo->getLeft(), n);
+    max_stock(nodo->getRight(), n);
+}
