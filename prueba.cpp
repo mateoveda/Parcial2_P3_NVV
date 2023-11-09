@@ -1,8 +1,18 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
 #include "NodoProducto.h"
 using namespace std;
 
-int main(){
+int main(int argc, char **argv){
+
+    cout << "La cantidad de argumentos es:\n";
+    for(int i = 0; i < argc; i++){
+        cout << "Argumento " << i << ": " << argv[i] <<endl;
+    }
+
+    /*
     Producto prueba;
     prueba.nombre = "Lola";
     prueba.codigo = "ibguiwrnuifdsbfiuds";
@@ -18,5 +28,5 @@ int main(){
 
     cout<<"Ahora usando lo que invente:\n";
     oficial.printNodo();
-
+    */
 }
