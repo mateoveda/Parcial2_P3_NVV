@@ -34,7 +34,8 @@ empresa y por línea de comandos permita la visualización de la siguiente infor
 Consideraciones del archivo CSV:
 * La cantidad de depósitos puede variar.
 * La cantidad de artículos diferentes puede variar.
-Manual de Uso:
+
+### Manual de Uso:
 
 Uso normal:
 Procesador_inventario.exe [Argumentos] inventariofisico.csv
