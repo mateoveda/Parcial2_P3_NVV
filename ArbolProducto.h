@@ -7,25 +7,21 @@ private:
   string search(Producto dato, NodoProducto *r);
   bool searchB(Producto dato, NodoProducto *r);
   NodoProducto *put(Producto dato, NodoProducto *r);
-  NodoProducto *remove(Producto dato, NodoProducto *r);
-  NodoProducto *findMaxAndRemove(NodoProducto *r, bool *found);
   void preorder(NodoProducto *r);
   void inorder(NodoProducto *r);
   void postorder(NodoProducto *r);
-  int contarPorNivel(int n, int nAct, NodoProducto *r);
+  int total_art(NodoProducto* r);
+  int contarNodos(NodoProducto* r);
+  void min_stock(NodoProducto* nodo, int n);
 
 public:
   ArbolProducto();
 
   void put(Producto dato);
 
-  void putt(Producto dato, NodoProducto*r);
-
   string search(Producto dato);
 
   bool searchB(Producto dato);
-
-  void remove(Producto dato);
 
   void preorder();
 
@@ -39,7 +35,12 @@ public:
 
   void print();
 
-  int contarPorNivel(int nivel);
+  int contarProductos();
+
+  int contarnodos();
+
+  void minStock(int n);
+
 };
 
 /**
@@ -170,80 +171,6 @@ NodoProducto *ArbolProducto::put(Producto dato, NodoProducto *r)
 }
 
 
-
-/**
- * Elimina un dato del árbol
- * @param clave Clave para identificar el nodo a borrar
- */
-
-void ArbolProducto::remove(Producto dato){
-  root = remove(dato, root);
-}
-
-
-NodoProducto *ArbolProducto::remove(Producto dato, NodoProducto *r)
-{
-  NodoProducto *aux;
-
-  if (r == nullptr)
-  {
-    throw 404;
-  }
-
-  if (r->getNombre() == dato.nombre)
-  {
-
-    if (r->getLeft() == nullptr && r->getRight() == nullptr)
-    {
-      delete r;
-      return nullptr;
-    }
-    else if (r->getLeft() != nullptr && r->getRight() == nullptr)
-    {
-      aux = r->getLeft();
-      delete r;
-      return aux;
-    }
-    else if (r->getLeft() == nullptr && r->getRight() != nullptr)
-    {
-      aux = r->getRight();
-      delete r;
-      return aux;
-    }
-    else if (r->getLeft() != nullptr && r->getRight() != nullptr)
-    {
-
-      if (r->getLeft()->getRight() != nullptr)
-      {
-        // Aca tenemos que buscar el valor maximo
-        bool found;
-        aux = findMaxAndRemove(r->getLeft(), &found);
-        aux->setRight(r->getRight());
-        aux->setLeft(r->getLeft());
-      }
-      else
-      {
-        aux = r->getLeft();
-        r->getLeft()->setRight(r->getRight());
-      }
-      delete r;
-      return aux;
-    }
-  }
-  else if (r->getNombre() > dato.nombre)
-  {
-    r->setLeft(remove(dato, r->getLeft()));
-  }
-  else
-  {
-    r->setRight(remove(dato, r->getRight()));
-  }
-
-  return r;
-}
-
-
-
 /**
  * Informa si un árbol esta vacío
  * @return
@@ -331,27 +258,60 @@ void ArbolProducto::print()
     root->printNodo();
 }
 
- 
-int ArbolProducto::contarPorNivel(int nivel) {
-    return contarPorNivel(nivel,0,root);
+
+/**
+ * cuenta la cantidad total de artículos del arbol
+ */
+int ArbolProducto::contarProductos(){
+  return total_art(root);
 }
 
- 
-int ArbolProducto::contarPorNivel(int n, int nAct, NodoProducto *r) {
-    if(n==nAct){
-        if(r!= nullptr){
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    } else {
-        if(nAct>n){
-            return 0;
-        } else if(r== nullptr){
-            return 0;
-        }
+
+/**
+ * Cuenta la cantidad total de artículos del nodo y sus hijos
+ */
+int ArbolProducto::total_art(NodoProducto* nodo) {
+    if (nodo == nullptr) {
+        return 0;
     }
 
-    return contarPorNivel(n,nAct+1,r->getLeft()) + contarPorNivel(n,nAct+1,r->getRight());
+    // Suma los depósitos del nodo actual
+    int sumaActual = nodo->getStocktotal();
+
+    // Suma los depósitos de los nodos izquierdo y derecho recursivamente
+    int sumaIzquierda = total_art(nodo->getLeft());
+    int sumaDerecha = total_art(nodo->getRight());
+
+    // Devuelve la suma total
+    return sumaActual + sumaIzquierda + sumaDerecha;
 }
+
+int ArbolProducto::contarnodos(){
+  return contarNodos(root);
+}
+
+int ArbolProducto::contarNodos(NodoProducto* nodo) {
+    if (nodo == nullptr) {
+        return 0;
+    }
+    return 1 + contarNodos(nodo->getLeft()) + contarNodos(nodo->getRight());
+}
+
+void ArbolProducto::minStock(int n){
+    min_stock(root, n);
+}
+
+void ArbolProducto::min_stock(NodoProducto* nodo, int n) {
+    if (nodo == nullptr) {
+        return;
+    }
+
+    if (nodo->getStocktotal() <= n) {
+        nodo->printNodo();
+    }
+
+    min_stock(nodo->getLeft(), n);
+    min_stock(nodo->getRight(), n);
+}
+
+

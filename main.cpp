@@ -1,11 +1,77 @@
 #include <iostream>
-#include "Cola.h"
-#include "ArbolBinario.h"
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include "ArbolProducto.h"
+#include "Producto.h"
 #define fore(i,a,b) for(int i=a; i<b; i++)
+#define NOMBRE_ARCHIVO "C:/Users/Usuario/Desktop/Parcial2_P3_NVV/PARA SUBIR A MAIN (TRABAJAR ACÁ)/output/Inventariado Fisico.csv"
 using namespace std;
 
 /*
+//INCLUIR LAS FUNCIONES
 
+#define NOMBRE_ARCHIVO "C:/Users/Usuario/Desktop/Parcial2_P3_NVV/PARA SUBIR A MAIN (TRABAJAR ACÁ)/output/Inventariado Fisico.csv"
+//ACTUALIZAR UBICACION CUANDO SE PASE A MAIN
+using namespace std;
+
+
+//Declaracion de funciones
+void insertRecognitionTree(ArbolProducto& arbol);
+
+
+int main() {
+
+    // INCLUIR EL MENU
+
+    return 0;
+}
+
+void insertRecognitionTree(ArbolProducto& arbol) {
+    ifstream archivo(NOMBRE_ARCHIVO);
+
+    if (!archivo.is_open()) {
+        cerr << "\nNo se pudo abrir el archivo." << endl;
+        return;
+    } else {
+        cout << "\nArchivo abierto." << endl;
+    }
+
+    string linea;
+    getline(archivo, linea); // Ignorar la primera línea que contiene los encabezados
+
+    while (getline(archivo, linea)) {
+        istringstream ss(linea);
+        string columna;
+        vector<string> columnas; // Almacenar todas las columnas de una línea
+
+        // Leer todas las columnas de la línea
+        while (getline(ss, columna, ',')) {
+            columnas.push_back(columna);
+        }
+
+        // Las primeras columnas son strings
+        string columna2 = columnas[1];
+        string columna3 = columnas[2];
+
+        // Creamos un objeto de tipo Producto
+        Producto nuevoProducto;
+        nuevoProducto.codigo = columna2;
+        nuevoProducto.nombre = columna3;
+
+        // Almacenamos los depósitos en la cola
+        for (size_t i = 3; i < columnas.size(); ++i) {
+            int deposito = columnas[i].empty() ? 0 : stoi(columnas[i]);
+            nuevoProducto.depositos.encolar(deposito);
+        }
+
+
+            // Agregamos el artículo al árbol existente
+            arbol.put(nuevoProducto);
+        
+    }
+}
 
 Comentarios:
 
@@ -35,36 +101,77 @@ respetando las cantidades de cada uno (sume por deposito).
 4. hay que armar el algoritmo para que se ordene solito el arbol.
 
 */ 
+void menu(ArbolProducto& arbol);
 
-struct Producto{
-    string nombre;
-    string codigo;
-    Cola<int> depositos;
+void minimoStock(ArbolProducto& arbol);
+
+void minimoStockPorDeposito(ArbolProducto& arbol){
+    cout<<"a\n";
 };
 
-void menu();
+int Stockindividual(ArbolProducto& arbol);
 
-int totalArticulos();
+int StockindividualporDeposito(ArbolProducto& arbol);
 
-int totalArticulosdiferentes();
+void buscarPorMinimoStock(ArbolProducto& arbol);
 
-void minimoStock();
-
-void minimoStockPorDeposito();
-
-int Stockindividual();
-
-int StockindividualporDeposito();
-
-void buscarPorMinimoStock();
+void insertRecognitionTree(ArbolProducto& arbol);
 
 int main(){
-    ArbolBinario<Producto> productos;
-    menu();
+    ArbolProducto productos;
+    insertRecognitionTree(productos);
+    menu(productos);
     
 }
 
-void menu(){
+
+void insertRecognitionTree(ArbolProducto& arbol) {
+    ifstream archivo(NOMBRE_ARCHIVO);
+
+    if (!archivo.is_open()) {
+        cerr << "\nNo se pudo abrir el archivo." << endl;
+        return;
+    } else {
+        cout << "\nArchivo abierto." << endl;
+    }
+
+    string linea;
+    getline(archivo, linea); // Ignorar la primera línea que contiene los encabezados
+
+    while (getline(archivo, linea)) {
+        istringstream ss(linea);
+        string columna;
+        vector<string> columnas; // Almacenar todas las columnas de una línea
+
+        // Leer todas las columnas de la línea
+        while (getline(ss, columna, ',')) {
+            columnas.push_back(columna);
+        }
+
+        // Las primeras columnas son strings
+        string columna2 = columnas[1];
+        string columna3 = columnas[2];
+
+        // Creamos un objeto de tipo Producto
+        Producto nuevoProducto;
+        nuevoProducto.codigo = columna2;
+        nuevoProducto.nombre = columna3;
+
+        // Almacenamos los depósitos en la cola
+        for (size_t i = 3; i < columnas.size(); ++i) {
+            int deposito = columnas[i].empty() ? 0 : stoi(columnas[i]);
+            nuevoProducto.depositos.encolar(deposito);
+        }
+
+
+            // Agregamos el artículo al árbol existente
+            arbol.put(nuevoProducto);
+        
+    }
+}
+
+
+void menu(ArbolProducto& arbol){
     char opcion = '0';
     cout<<"\t\t* * * * * * * * M E N U * * * * * * * *\n";
     cout<<"1. Ver la cantidad total de articulos diferentes.\n"
@@ -79,21 +186,24 @@ void menu(){
     switch (opcion)
     {
     case '1'://Ver la cantidad total de articulos diferentes.
-        cout<<"La cantidad total de articulos diferentes es: "<<totalArticulosdiferentes()<<"\n";
+        cout<<"La cantidad total de articulos diferentes es: "<<arbol.contarProductos()<<"\n";
         break;
 
     case '2'://Ver la cantidad total de articulos.
-        cout<<"Cantidad total de articulos"<<totalArticulos()<<"\n";
+        cout<<"Cantidad total de articulos"<<arbol.contarnodos()<<"\n";
         break;
         
     case '3'://Ver el listado de articulos que estan en el minimo de stock.
+        int n = 0;
+        cout<<"Introducir el mínimo de stock que desea consultar: ";
+        cin>>n;
         cout<<"Listado de articulos que están en el minimo de stock:\n";
-        minimoStock();
+        arbol.minStock(n);
         break;
 
     case '4'://Listado de articulos que estan en el minimo de stock y por deposito.
         cout<<"Listado de articulos que estan en el minimo de stock y por deposito:\n";
-        minimoStockPorDeposito();
+        minimoStockPorDeposito(arbol);
         break;
 
     case '5'://Stock individual de cada articulo.
@@ -116,4 +226,6 @@ void menu(){
         break;
     } 
 }
+
+
 //
