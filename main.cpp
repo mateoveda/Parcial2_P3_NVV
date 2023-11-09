@@ -27,13 +27,14 @@ void insertRecognitionTree(ArbolProducto& arbol);
 void insertRecognitionTree(ArbolProducto& arbol);
 
 int main(int argc, char** argv){
+    ArbolProducto productos;
     string archivo= argv[argc-1];
     cout<<"ARCHIVO: "<<archivo<<endl;
     if(argc<3 || argc>5){
         cout<<"cantidad de argumentos no valida0\n";
     }else{
-        ArbolProducto productos;
         insertRecognitionTree(productos);
+        cout<<"Probando"<<endl;
         string arg = argv[1];
         cout<<arg<<endl;
         string nombre;
@@ -106,17 +107,17 @@ int main(int argc, char** argv){
     interprete*/
 
 void insertRecognitionTree(ArbolProducto& arbol) {
-    ifstream archivo(NOMBRE_ARCHIVO);
-
+    ifstream archivo("inventariado Fisico.csv");
+    //NOMBRE_ARCHIVO
     if (!archivo.is_open()) {
-        cerr << "\nNo se pudo abrir el archivo." << endl;
+        cout << "\nNo se pudo abrir el archivo." << endl;
         return;
     }
-
     string linea;
     getline(archivo, linea); // Ignorar la primera línea que contiene los encabezados
 
     while (getline(archivo, linea)) {
+        cout<<"prueba"<<endl;
         istringstream ss(linea);
         string columna;
         vector<string> columnas; // Almacenar todas las columnas de una línea
@@ -124,26 +125,31 @@ void insertRecognitionTree(ArbolProducto& arbol) {
         // Leer todas las columnas de la línea
         while (getline(ss, columna, ',')) {
             columnas.push_back(columna);
+            cout<<"prueba2"<<endl;
         }
+
 
         // Las primeras columnas son strings
         string columna2 = columnas[1];
         string columna3 = columnas[2];
-
+        cout<<"prueba3"<<endl;
         // Creamos un objeto de tipo Producto
         Producto nuevoProducto;
         nuevoProducto.codigo = columna2;
         nuevoProducto.nombre = columna3;
-
+        cout<<"prueba4"<<endl;
         // Almacenamos los depósitos en la cola
-        for (size_t i = 3; i < columnas.size(); ++i) {
-            int deposito = columnas[i].empty() ? 0 : stoi(columnas[i]);
-            nuevoProducto.depositos.encolar(deposito);
+            for (size_t i = 3; i < columnas.size(); ++i) {
+                int deposito = columnas[i].empty() ? 0 : stoi(columnas[i]);
+                nuevoProducto.depositos.encolar(deposito);
+                cout<<"prueba5"<<endl;
         }
 
-
+            cout<<"prueba6"<<endl;
             // Agregamos el artículo al árbol existente
             arbol.put(nuevoProducto);
+            cout<<"prueba7"<<endl;
         
     }
+    cout<<"prueba8"<<endl;
 }

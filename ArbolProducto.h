@@ -167,7 +167,7 @@ NodoProducto *ArbolProducto::put(Producto dato, NodoProducto *r)
 
   if (r->getNombre() == dato.nombre)
   {
-    throw 200;
+    return r;//despues sumar
   }
 
   if (r->getNombre() > dato.nombre)
