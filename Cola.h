@@ -29,9 +29,6 @@ public:
 
   void peek();
 
-  void encolarConPrioridad(const T &elemento, int prioridad);//.
-
-  void EncolarConPrioridad(T dato, int prioridad);
 };
 
 /**

@@ -6,7 +6,7 @@ protected:
 private:
   string search(Producto dato, NodoProducto *r);
   bool searchB(Producto dato, NodoProducto *r);
-  NodoProducto *Put(Producto dato, NodoProducto *r);
+  NodoProducto *Put(Producto& dato, NodoProducto *r);
   void preorder(NodoProducto *r);
   void inorder(NodoProducto *r);
   void postorder(NodoProducto *r);
@@ -21,7 +21,7 @@ private:
 public:
   ArbolProducto();
 
-  void put(Producto dato);
+  void put(Producto& dato);
 
   string search(Producto dato);
 
@@ -147,8 +147,9 @@ bool ArbolProducto::searchB(Producto dato, NodoProducto *r) {
  * @param clave Clave para agregar el dato
  * @param dato Dato a agregar
  */
- void ArbolProducto::put(Producto dato) {
+ void ArbolProducto::put(Producto& dato) {
   root=Put(dato, root);
+  std::cout<<"-------------"<<std::endl;
 }
 
 /**
@@ -158,26 +159,33 @@ bool ArbolProducto::searchB(Producto dato, NodoProducto *r) {
  */
 
 
-NodoProducto *ArbolProducto::Put(Producto dato, NodoProducto *r)
+NodoProducto *ArbolProducto::Put(Producto& dato, NodoProducto *r)
 {
   if (r == nullptr)
   {
     return new NodoProducto(dato);
   }
-
+  std::cout<<"debug 5";
+  
   if (r->getNombre() == dato.nombre)
   {
+    std::cout<<"debug 6";
     return r;//despues sumar
   }
+  std::cout<<"debug 7";
 
   if (r->getNombre() > dato.nombre)
   {
+    std::cout<<"debug 10";
     r->setLeft(Put(dato, r->getLeft()));
   }
   else
   {
+    std::cout<<"debug 11";
     r->setRight(Put(dato, r->getRight()));
+    std::cout<<"debug 13";
   }
+  std::cout<<"debug 14";
 
   return r;
 }
@@ -266,8 +274,13 @@ void ArbolProducto::postorder(NodoProducto *r)
 
 void ArbolProducto::print()
 {
-  if (root != NULL)
+  if (root != nullptr) //ANTES ERA NULL
+  {
+    std::cout<<"abcd_1";
     root->printNodo();
+    std::cout<<"abcd_2";
+  }
+    
 }
 
 

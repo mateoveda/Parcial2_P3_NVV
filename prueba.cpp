@@ -1,8 +1,31 @@
 #include <iostream>
-#include "NodoProducto.h"
+#include "ArbolProducto.h"
 using namespace std;
 
 int main(){
+    ArbolProducto toby;
+    NodoProducto tob;
+    Producto to;
+    string aux;
+    int auxi;
+    cout<<"codigo:\n";
+    cin>>aux;
+    to.codigo = aux;
+    cout<<"nombre:\n";
+    cin>>aux;
+    to.nombre = aux;
+    for(int i = 0; i < 5; i++){
+        cout<<"entero N: "<<i<<endl;
+        cin>>auxi;
+        to.depositos.encolar(auxi);
+    }
+    tob.setDato(to);
+    toby.put(to);
+    
+    toby.print();
+}
+
+/*
     Producto prueba;
     int opcion;
     prueba.nombre = "Lola";
@@ -29,4 +52,4 @@ int main(){
     //oficial.sumarNodo(lolo);
     cout<<"prueita: "<<oficial.getNombre()<<endl;
 
-}
+*/

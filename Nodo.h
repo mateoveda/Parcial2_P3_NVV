@@ -12,7 +12,7 @@ public:
     {
         return dato;
     }
-    void setDato(T d)
+    void setDato(T& d)
     {
         dato = d;
     }
