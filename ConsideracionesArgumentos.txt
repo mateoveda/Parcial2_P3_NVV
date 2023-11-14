@@ -1,0 +1,25 @@
+    limite minimo de argumentos: 3
+    lim max: 5
+    si cumple, abris archivo, inicializas variables, llamas lo que necesites
+    
+    CASES ->arg 1
+    -total_art_dif -> funcion propia
+    -total_art -> funcion propia
+    
+    -max_stock -> necestias que el arg 2 no sea el archivo y sea siosi un entero (piso)
+    -min_stock tiene dos opciones
+        arg 2 es entero y arg 3 tiene que ser archivo -> prodcutos cuyo stock total es >= arg 2
+        arg 2 sea entero, el 3 tambien, y el 4 sea el atchivo -> ahi el arg 3 es el deposito
+    
+    -stock
+        arg 2 sea producto y el arg 3 sea el archivo -> stock total del producto
+        arg 2 es prod y arg 3 es esntero y arg 4 es archivo -> stock del prod en el depo
+    
+    argc-> cantidad de arg
+    argc-1 es la pos del archivo (o deberia)
+    argv[] es el array de los argumentos
+    archivo-> argv[argc-1]
+    main-> argv[0]
+    stoi(argv[2])
+
+    if(3==argc-1)
