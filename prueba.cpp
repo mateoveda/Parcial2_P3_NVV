@@ -19,7 +19,7 @@ int main(){
         cin>>auxi;
         to.depositos.encolar(auxi);
     }
-    tob.setDato(to);
+    //tob.setDato(to);
     toby.put(to);
     
     toby.print();

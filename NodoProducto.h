@@ -64,12 +64,10 @@ public:
   int getStocktotal(){
     int suma = 0;
     Cola<int> aux;
-    cout<<"debugtransitorio\n";
     while(!dato.depositos.esVacia()){
         int auxi = dato.depositos.desencolar();
         suma += auxi;
         aux.encolar(auxi);
-        cout<<"debugt\n";
     }
     while(!aux.esVacia()){
         dato.depositos.encolar(aux.desencolar());
@@ -108,9 +106,7 @@ public:
   {
     this->dato.nombre = d.nombre;
     this->dato.codigo = d.codigo;
-    cout<<"crea la cola?\n";
     while(!d.depositos.esVacia()){
-      cout<<"Si se guarda\n";
         this->dato.depositos.encolar(d.depositos.desencolar());
     }
     

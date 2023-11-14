@@ -149,7 +149,7 @@ bool ArbolProducto::searchB(Producto dato, NodoProducto *r) {
  */
  void ArbolProducto::put(Producto& dato) {
   root=Put(dato, root);
-  std::cout<<"-------------"<<std::endl;
+  //std::cout<<"-------------"<<std::endl;
 }
 
 /**
@@ -276,9 +276,7 @@ void ArbolProducto::print()
 {
   if (root != nullptr) //ANTES ERA NULL
   {
-    std::cout<<"abcd_1";
     root->printNodo();
-    std::cout<<"abcd_2";
   }
     
 }
