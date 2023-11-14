@@ -149,7 +149,6 @@ bool ArbolProducto::searchB(Producto dato, NodoProducto *r) {
  */
  void ArbolProducto::put(Producto& dato) {
   root=Put(dato, root);
-  //std::cout<<"-------------"<<std::endl;
 }
 
 /**
@@ -164,29 +163,21 @@ NodoProducto *ArbolProducto::Put(Producto& dato, NodoProducto *r)
   if (r == nullptr)
   {
     return new NodoProducto(dato);
-  }
-  std::cout<<"debug 5";
-  
+  }  
   if (r->getNombre() == dato.nombre)
   {
-    std::cout<<"debug 6";
     return r;//despues sumar
   }
-  std::cout<<"debug 7";
 
   if (r->getNombre() > dato.nombre)
   {
-    std::cout<<"debug 10";
     r->setLeft(Put(dato, r->getLeft()));
   }
   else
   {
-    std::cout<<"debug 11";
     r->setRight(Put(dato, r->getRight()));
-    std::cout<<"debug 13";
   }
-  std::cout<<"debug 14";
-
+  
   return r;
 }
 

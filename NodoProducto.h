@@ -153,7 +153,7 @@ public:
     cout<<"Nombre: "<<this->getNombre()<<"\n";
     cout<<"Codigo: "<<this->getCodigo()<<"\n";
     cout<<"Stock total: "<<this->getStocktotal()<<"\n";
-
+    cout<<"\n";
   }
 
   /**

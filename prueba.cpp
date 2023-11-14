@@ -4,14 +4,13 @@ using namespace std;
 
 int main(){
     ArbolProducto toby;
-    NodoProducto tob;
-    Producto to;
+    Producto to, ma, pa;
     string aux;
     int auxi;
-    cout<<"codigo:\n";
+    cout<<"codigo: ";
     cin>>aux;
     to.codigo = aux;
-    cout<<"nombre:\n";
+    cout<<"nombre: ";
     cin>>aux;
     to.nombre = aux;
     for(int i = 0; i < 5; i++){
@@ -21,8 +20,34 @@ int main(){
     }
     //tob.setDato(to);
     toby.put(to);
-    
     toby.print();
+
+    cout<<"codigo: ";
+    cin>>aux;
+    ma.codigo = aux;
+    cout<<"nombre: ";
+    cin>>aux;
+    ma.nombre = aux;
+    for(int i = 0; i < 5; i++){
+        cout<<"entero N: "<<i<<endl;
+        cin>>auxi;
+        ma.depositos.encolar(auxi);
+    }
+    toby.put(ma);
+
+    cout<<"codigo: ";
+    cin>>aux;
+    pa.codigo = aux;
+    cout<<"nombre: ";
+    cin>>aux;
+    pa.nombre = aux;
+    for(int i = 0; i < 5; i++){
+        cout<<"entero N: "<<i<<endl;
+        cin>>auxi;
+        pa.depositos.encolar(auxi);
+    }
+    toby.put(pa);
+    toby.inorder();
 }
 
 /*
