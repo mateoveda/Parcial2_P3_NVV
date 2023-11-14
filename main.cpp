@@ -11,6 +11,10 @@
 using namespace std;
 
 /*
+Consideraciones para el jueves:
+Agregar para guardar el tema de los grupos.
+podemos hacer las funciones totales (las primeras dos), fuera del arbol, directamente que sean variables locales
+
 //INCLUIR LAS FUNCIONES
 
 #define NOMBRE_ARCHIVO "C:/Users/Usuario/Desktop/Parcial2_P3_NVV/PARA SUBIR A MAIN (TRABAJAR ACÁ)/output/Inventariado Fisico.csv"
@@ -117,7 +121,6 @@ void insertRecognitionTree(ArbolProducto& arbol) {
     getline(archivo, linea); // Ignorar la primera línea que contiene los encabezados
 
     while (getline(archivo, linea)) {
-        cout<<"prueba"<<endl;
         istringstream ss(linea);
         string columna;
         vector<string> columnas; // Almacenar todas las columnas de una línea
@@ -125,24 +128,20 @@ void insertRecognitionTree(ArbolProducto& arbol) {
         // Leer todas las columnas de la línea
         while (getline(ss, columna, ',')) {
             columnas.push_back(columna);
-            cout<<"prueba2"<<endl;
         }
 
 
         // Las primeras columnas son strings
         string columna2 = columnas[1];
         string columna3 = columnas[2];
-        cout<<"prueba3"<<endl;
         // Creamos un objeto de tipo Producto
         Producto nuevoProducto;
         nuevoProducto.codigo = columna2;
         nuevoProducto.nombre = columna3;
-        cout<<"prueba4"<<endl;
         // Almacenamos los depósitos en la cola
             for (size_t i = 3; i < columnas.size(); ++i) {
                 int deposito = columnas[i].empty() ? 0 : stoi(columnas[i]);
                 nuevoProducto.depositos.encolar(deposito);
-                cout<<"prueba5"<<endl;
         }
 
             cout<<"prueba6"<<endl;
@@ -151,5 +150,4 @@ void insertRecognitionTree(ArbolProducto& arbol) {
             cout<<"prueba7"<<endl;
         
     }
-    cout<<"prueba8"<<endl;
 }

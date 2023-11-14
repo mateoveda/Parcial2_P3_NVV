@@ -6,7 +6,7 @@ protected:
 private:
   string search(Producto dato, NodoProducto *r);
   bool searchB(Producto dato, NodoProducto *r);
-  NodoProducto *put(Producto dato, NodoProducto *r);
+  NodoProducto *Put(Producto dato, NodoProducto *r);
   void preorder(NodoProducto *r);
   void inorder(NodoProducto *r);
   void postorder(NodoProducto *r);
@@ -148,7 +148,7 @@ bool ArbolProducto::searchB(Producto dato, NodoProducto *r) {
  * @param dato Dato a agregar
  */
  void ArbolProducto::put(Producto dato) {
-  root=put(dato, root);
+  root=Put(dato, root);
 }
 
 /**
@@ -158,7 +158,7 @@ bool ArbolProducto::searchB(Producto dato, NodoProducto *r) {
  */
 
 
-NodoProducto *ArbolProducto::put(Producto dato, NodoProducto *r)
+NodoProducto *ArbolProducto::Put(Producto dato, NodoProducto *r)
 {
   if (r == nullptr)
   {
@@ -172,11 +172,11 @@ NodoProducto *ArbolProducto::put(Producto dato, NodoProducto *r)
 
   if (r->getNombre() > dato.nombre)
   {
-    r->setLeft(put(dato, r->getLeft()));
+    r->setLeft(Put(dato, r->getLeft()));
   }
   else
   {
-    r->setRight(put(dato, r->getRight()));
+    r->setRight(Put(dato, r->getRight()));
   }
 
   return r;
