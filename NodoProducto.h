@@ -26,6 +26,7 @@ public:
   */
   NodoProducto(Producto& d)
   {
+    dato.grupo = d.grupo; //COMENTARIO
     dato.nombre = d.nombre;
     dato.codigo = d.codigo;
     while(!d.depositos.esVacia()){
@@ -47,6 +48,14 @@ public:
  */
   string getNombre() const{
     return this-> dato.nombre;
+  }
+
+  /**
+ * Retorna el grupo donde está el dato en el arbol
+ * @return nombre
+ */
+  string getGrupo() const{
+    return this-> dato.grupo; //COMENTARIO
   }
 
   /**
@@ -106,6 +115,7 @@ public:
   void setDato(Producto& d)
   {
     this->dato.nombre = d.nombre;
+    this->dato.grupo = d.grupo;
     this->dato.codigo = d.codigo;
     while(!d.depositos.esVacia()){
         this->dato.depositos.encolar(d.depositos.desencolar());
@@ -151,6 +161,7 @@ public:
  * Imprime los datos del nodo.
  */
   void printNodo(){
+    cout<<"Grupo: "<<this->getGrupo()<<"\n";
     cout<<"Nombre: "<<this->getNombre()<<"\n";
     cout<<"Codigo: "<<this->getCodigo()<<"\n";
     cout<<"Stock total: "<<this->getStocktotal()<<"\n";
@@ -161,39 +172,11 @@ public:
  * Imprime los datos del nodo.
  */
   void printNodoDepo(int n){
+    cout<<"Grupo: "<<this->getNombre()<<"\n";
     cout<<"Nombre: "<<this->getNombre()<<"\n";
     cout<<"Codigo: "<<this->getCodigo()<<"\n";
     cout<<"Stock total: "<<this->getStocktotal()<<"\n";
     cout<<"Stock total por deposito "<<n+1<<": "<<this->getStockdeposito(n)<<"\n";  //n-1 tendria que ser n?
     cout<<"\n";
   }
-
-  /**
- * Simplemente, suma las colas de dos nodos, 
- * suponiendo que tengan el mismo tamaño.
- */
-
-/*
-  void sumarNodo(Producto& d){
-    Cola<int> aux;
-    Cola<int> aux1;
-    Cola<int> aux2;
-    int au1 = 0, au2 = 0;
-    while(!dato.depositos.esVacia()){
-      aux1.encolar(dato.depositos.desencolar());
-    }
-    while(!d.depositos.esVacia()){
-      aux2.encolar(d.depositos.desencolar());
-    }
-    while(!aux1.esVacia() && !aux2.esVacia()){
-      au1 = aux1.desencolar();
-      au2 = aux2.desencolar();
-      aux.encolar(au1 + au2);
-    }
-    
-    while(!aux.esVacia()){
-      dato.depositos.encolar(aux.desencolar());
-    }
-  }
-  */
-  };
+};
