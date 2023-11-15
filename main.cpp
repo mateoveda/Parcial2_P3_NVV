@@ -1,155 +1,246 @@
 #include <iostream>
+#include <ctime>
+#include <string>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <vector>
 #include "ArbolProducto.h"
 #include "Producto.h"
-//#include "min_stock_dep.h"
 #define fore(i,a,b) for(int i=a; i<b; i++)
-#define NOMBRE_ARCHIVO "C:/Users/Mateo/OneDrive/Escritorio/Parcial2_P3_NVV/Inventariado Fisico.csv"
 using namespace std;
 
-/*
-//INCLUIR LAS FUNCIONES
+void printHelp();
 
-#define NOMBRE_ARCHIVO "C:/Users/Usuario/Desktop/Parcial2_P3_NVV/PARA SUBIR A MAIN (TRABAJAR ACÁ)/output/Inventariado Fisico.csv"
-//ACTUALIZAR UBICACION CUANDO SE PASE A MAIN
-using namespace std;
+void insertRecognitionTree(ArbolProducto& arbol, string nombreArchivo, int& tam);
 
-
-//Declaracion de funciones
-void insertRecognitionTree(ArbolProducto& arbol);
-
-
-*/ 
-
-void insertRecognitionTree(ArbolProducto& arbol);
+//void menu(int argc, char** argv);
 
 int main(int argc, char** argv){
+    clock_t begin;
+    begin = clock();
+
+    cout << "Comenzando a medir Tiempo\n" << endl;
+    //INICIO TIMER
+    
+    /*
+    #include <iostream>
+#include <ctime>
+
+using namespace std;
+
+
+int main(){
+    clock_t begin;
+    begin = clock();
+
+    cout << "Comenzando a medir Tiempo\n" << endl;
+
+    clock_t end = clock();
+
+    double elapsed_secs = static_cast<double>(end-begin) / CLOCKS_PER_SEC;
+
+    cout << "Tiempo transcurrido ---> " << elapsed_secs << " segundos\n" << endl;
+
+    return 0;
+}
+
+    */
     ArbolProducto productos;
-    string archivo= argv[argc-1];
-    cout<<"ARCHIVO: "<<archivo<<endl;
+    string archivo = argv[argc-1];
+    int tamanioArchivo=0;
+
     if(argc<3 || argc>5){
-        cout<<"cantidad de argumentos no valida0\n";
+
+        if(argc==1){
+            printHelp();
+
+        }else{cout<<"cantidad de argumentos no valida\n";}
+
     }else{
-        insertRecognitionTree(productos);
-        cout<<"Probando"<<endl;
+
+        cout<<archivo<<endl;
+        insertRecognitionTree(productos, archivo, tamanioArchivo);
         string arg = argv[1];
-        cout<<arg<<endl;
         string nombre;
         int lim, depo;
+
         if(arg == "-total_art_dif" || arg == "-total_art"){
+
             if(argc != 3){
+
                 cout<<"Argumentos no válidos"<<endl;
+                
             }else if(arg == "-total_art_dif"){
-                cout<<productos.contarProductos()<<endl;
-            }else if(arg == "-total_art"){
+
                 cout<<productos.contarnodos()<<endl;
+
+            }else if(arg == "-total_art"){
+
+                cout<<productos.contarProductos()<<endl;
+
             }
+
         }else if(arg == "-max_stock"){
+
             lim = stoi(argv[2]);
             productos.maxStock(lim);
+
         }else if(arg == "-min_stock"){
+
             if(argc == 5){
+
                 lim = stoi(argv[2]);
                 depo = stoi(argv[3]);
-                productos.minStockDeposito(lim, depo);
+
+                if(depo<1){
+
+                    cout<<"El numero de deposito ingresado es incorrecto, los depositos empiezan de 1 en adelante\n";
+
+                }else{productos.minStockDeposito(lim,depo-1);}
+
             }else if(argc == 4){
+
                 lim = stoi(argv[2]);
                 productos.minStock(lim);
+
             }
+
         }else if(arg == "-stock"){
+
             if(argc == 5){
+
                 nombre = argv[2];
                 depo = stoi(argv[3]);
-                productos.ObtenerDeposito(nombre,depo);
+
+                if(productos.ObtenerDeposito(nombre,depo)==-1){
+
+                    cout<<"\tNo se encontro el producto: "<<nombre<<"\n";
+
+                }else{
+
+                    cout<<"La cantidad de articulos: "
+                    <<nombre<<" en el deposito "
+                    <<depo<<" son: "<<productos.ObtenerDeposito(nombre,depo)<<endl;
+                    
+                    }
+
             }else if(argc == 4){
+
                 nombre = argv[2];
-                productos.Stocks(nombre);
+
+                if(productos.Stocks(nombre)==-1){
+
+                    cout<<"\tNo se encontro el producto: "<<nombre<<"\n";
+
+                }else{
+
+                    cout<<"La cantidad de articulos: "<<
+                    nombre<<" son: "<<productos.Stocks(nombre)<<"\n";
+
+                }
             }
-        }
+        }else{cout<<"\n\t-- Comando no reconocido --\n\n";}
     }
+    
+    //FIN TIMER
 
+    clock_t end = clock();
 
-    /*
-    limite minimo de argumentos: 3
-    lim max: 5
-    si cumple, abris archivo, inicializas variables, llamas lo que necesites
-    
-    CASES ->arg 1
-    -total_art_dif -> funcion propia
-    -total_art -> funcion propia
-    
-    -max_stock -> necestias que el arg 2 no sea el archivo y sea siosi un entero (piso)
-    -min_stock tiene dos opciones
-        arg 2 es entero y arg 3 tiene que ser archivo -> prodcutos cuyo stock total es >= arg 2
-        arg 2 sea entero, el 3 tambien, y el 4 sea el atchivo -> ahi el arg 3 es el deposito
-    
-    -stock
-        arg 2 sea producto y el arg 3 sea el archivo -> stock total del producto
-        arg 2 es prod y arg 3 es esntero y arg 4 es archivo -> stock del prod en el depo
-    
-    argc-> cantidad de arg
-    argc-1 es la pos del archivo (o deberia)
-    argv[] es el array de los argumentos
-    archivo-> argv[argc-1]
-    main-> argv[0]
-    stoi(argv[2])
+    double elapsed_secs = static_cast<double>(end-begin) / CLOCKS_PER_SEC;
 
-    if(3==argc-1)
-    */
-    
+    cout << "Tiempo transcurrido ---> " << elapsed_secs << " segundos\n" << endl;
+
+    return 0;
 }
-/*ArbolProducto productos;
-    insertRecognitionTree(productos);
-    
-    interprete*/
 
-void insertRecognitionTree(ArbolProducto& arbol) {
-    ifstream archivo("inventariado Fisico.csv");
-    //NOMBRE_ARCHIVO
+/*
+2. filtrar que no den más que 5 o n depositos.
+3. verificar sumar depositos
+
+*/
+
+void insertRecognitionTree(ArbolProducto& arbol, string nombreArchivo, int& tam) {
+    ifstream archivo(nombreArchivo);
+
     if (!archivo.is_open()) {
+
         cout << "\nNo se pudo abrir el archivo." << endl;
         return;
+
     }
     string linea;
-    getline(archivo, linea); // Ignorar la primera línea que contiene los encabezados
+
+    //encontrar tamanio maximo del vector
+
+    if (getline(archivo, linea)) {
+
+        istringstream ss(linea);
+        string columna;
+        vector<string> columnas;
+
+        while (getline(ss, columna, ',')) {
+
+            columnas.push_back(columna);
+            
+        }
+
+        tam = columnas.size(); //constante
+    }
+
 
     while (getline(archivo, linea)) {
-        cout<<"prueba"<<endl;
+
         istringstream ss(linea);
         string columna;
         vector<string> columnas; // Almacenar todas las columnas de una línea
 
-        // Leer todas las columnas de la línea
-        while (getline(ss, columna, ',')) {
+        while (getline(ss, columna, ',')) {         // Leer todas las columnas de la línea
+
             columnas.push_back(columna);
-            cout<<"prueba2"<<endl;
+
         }
 
 
         // Las primeras columnas son strings
         string columna2 = columnas[1];
         string columna3 = columnas[2];
-        cout<<"prueba3"<<endl;
+
         // Creamos un objeto de tipo Producto
         Producto nuevoProducto;
         nuevoProducto.codigo = columna2;
         nuevoProducto.nombre = columna3;
-        cout<<"prueba4"<<endl;
+
         // Almacenamos los depósitos en la cola
             for (size_t i = 3; i < columnas.size(); ++i) {
+
                 int deposito = columnas[i].empty() ? 0 : stoi(columnas[i]);
                 nuevoProducto.depositos.encolar(deposito);
-                cout<<"prueba5"<<endl;
-        }
 
-            cout<<"prueba6"<<endl;
+            }
+
+            int roca = columnas.size();
+
+            if(roca < tam){
+
+                nuevoProducto.depositos.encolar(0);
+
+            }
             // Agregamos el artículo al árbol existente
             arbol.put(nuevoProducto);
-            cout<<"prueba7"<<endl;
-        
     }
-    cout<<"prueba8"<<endl;
+}
+
+void printHelp(){ //LISTA DE COMANDOS
+
+    cout<<"\n1. *Cantidad de Articulos:*"
+<<"\n   - `-total_art_dif`: Cantidad total de articulos diferentes."
+<<"\n   - `-total_art`: Cantidad total de articulos.\n"
+<<"\n3. *Busqueda por Cotas:*"
+<<"\n   - `-min_stock_dep` [n],[deposito]: Listado de articulos con cantidad n o menos de stock segun un deposito."
+<<"\n   - `-min_stock` [n]: Listado de articulos con cantidad n o menos de stock."
+<<"\n   - `-max_stock` [n]: Listado de aquellos articulos cuyo stock es igual o supera el numero n.\n"
+<<"\n4. *Busqueda por Nombres:*"
+<<"\n   - `-stock` [nombre_articulo]: El stock total del articulo ingresado como argumento."
+<<"\n   - `-stock_dep` [nombre_articulo],[deposito]: El stock del articulo en un deposito.\n"
+<<"\n";
 }

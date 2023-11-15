@@ -24,7 +24,7 @@ public:
   /**
    * Es el constructor en donde yo ya le paso una estructura producto. 
   */
-  NodoProducto(Producto d)
+  NodoProducto(Producto& d)
   {
     dato.nombre = d.nombre;
     dato.codigo = d.codigo;
@@ -63,15 +63,14 @@ public:
  */
   int getStocktotal(){
     int suma = 0;
-    int auxi;
     Cola<int> aux;
     while(!dato.depositos.esVacia()){
-        auxi = dato.depositos.desencolar();
+        int auxi = dato.depositos.desencolar();
         suma += auxi;
         aux.encolar(auxi);
     }
     while(!aux.esVacia()){
-        dato.depositos.encolar(aux.desencolar());
+      dato.depositos.encolar(aux.desencolar());
     }
     return suma;
   }
@@ -84,10 +83,11 @@ public:
     int posA = 0;
     Cola<int> aux;
     while(!dato.depositos.esVacia()){
-      aux.encolar(dato.depositos.desencolar());
+      int au = dato.depositos.desencolar();
+      aux.encolar(au);
     }
 
-    while (!aux.esVacia() && posA < pos) {
+    while (!aux.esVacia() && posA < pos) { //posA <= pos
         dato.depositos.encolar(aux.desencolar());
         posA++;
     }
@@ -103,7 +103,7 @@ public:
  * Es un void, que agarra una estructura tipo Producto
  * y simplemente se la asigna al nodo.
  */
-  void setDato(Producto d)
+  void setDato(Producto& d)
   {
     this->dato.nombre = d.nombre;
     this->dato.codigo = d.codigo;
@@ -154,7 +154,18 @@ public:
     cout<<"Nombre: "<<this->getNombre()<<"\n";
     cout<<"Codigo: "<<this->getCodigo()<<"\n";
     cout<<"Stock total: "<<this->getStocktotal()<<"\n";
+    cout<<"\n";
+  }
 
+  /**
+ * Imprime los datos del nodo.
+ */
+  void printNodoDepo(int n){
+    cout<<"Nombre: "<<this->getNombre()<<"\n";
+    cout<<"Codigo: "<<this->getCodigo()<<"\n";
+    cout<<"Stock total: "<<this->getStocktotal()<<"\n";
+    cout<<"Stock total por deposito "<<n+1<<": "<<this->getStockdeposito(n)<<"\n";  //n-1 tendria que ser n?
+    cout<<"\n";
   }
 
   /**
@@ -163,7 +174,7 @@ public:
  */
 
 /*
-  void sumarNodo(Producto d){
+  void sumarNodo(Producto& d){
     Cola<int> aux;
     Cola<int> aux1;
     Cola<int> aux2;
