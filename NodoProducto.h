@@ -161,7 +161,7 @@ public:
  * Imprime los datos del nodo.
  */
   void printNodo(){
-    cout<<"Grupo: "<<this->getNombre()<<"\n";
+    cout<<"Grupo: "<<this->getGrupo()<<"\n";
     cout<<"Nombre: "<<this->getNombre()<<"\n";
     cout<<"Codigo: "<<this->getCodigo()<<"\n";
     cout<<"Stock total: "<<this->getStocktotal()<<"\n";
