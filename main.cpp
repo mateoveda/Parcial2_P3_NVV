@@ -13,38 +13,14 @@ void printHelp();
 
 void insertRecognitionTree(ArbolProducto& arbol, string nombreArchivo, int& tam);
 
-//void menu(int argc, char** argv);
+void menu(int argc, char** argv, ArbolProducto& arbol, string nombreArchivo, int tam);
 
 int main(int argc, char** argv){
     clock_t begin;
     begin = clock();
 
     cout << "Comenzando a medir Tiempo\n" << endl;
-    //INICIO TIMER
-    
-    /*
-    #include <iostream>
-#include <ctime>
 
-using namespace std;
-
-
-int main(){
-    clock_t begin;
-    begin = clock();
-
-    cout << "Comenzando a medir Tiempo\n" << endl;
-
-    clock_t end = clock();
-
-    double elapsed_secs = static_cast<double>(end-begin) / CLOCKS_PER_SEC;
-
-    cout << "Tiempo transcurrido ---> " << elapsed_secs << " segundos\n" << endl;
-
-    return 0;
-}
-
-    */
     ArbolProducto productos;
     string archivo = argv[argc-1];
     int tamanioArchivo=0;
@@ -58,7 +34,7 @@ int main(){
 
     }else{
 
-        cout<<archivo<<endl;
+        cout<<"Se abrio el archivo: "<<archivo<<endl;
         insertRecognitionTree(productos, archivo, tamanioArchivo);
         string arg = argv[1];
         string nombre;
@@ -72,17 +48,18 @@ int main(){
                 
             }else if(arg == "-total_art_dif"){
 
-                cout<<productos.contarnodos()<<endl;
+                cout<<"La cantidad total de articulos diferentes es: "<<productos.contarnodos()<<endl;
 
             }else if(arg == "-total_art"){
 
-                cout<<productos.contarProductos()<<endl;
+                cout<<"La cantidad total de articulos es: "<<productos.contarProductos()<<endl;
 
             }
 
         }else if(arg == "-max_stock"){
 
             lim = stoi(argv[2]);
+            cout<<"Los productos cuyo stock es igual o supera los "<<lim<<" articulos son: "<<endl;
             productos.maxStock(lim);
 
         }else if(arg == "-min_stock"){
@@ -92,15 +69,19 @@ int main(){
                 lim = stoi(argv[2]);
                 depo = stoi(argv[3]);
 
-                if(depo<1){
+                if(depo<1 || tamanioArchivo-3 < depo){
 
                     cout<<"El numero de deposito ingresado es incorrecto, los depositos empiezan de 1 en adelante\n";
 
-                }else{productos.minStockDeposito(lim,depo-1);}
+                }else{
+                    cout<<"Los productos cuyo stock es igual o supera los "<<lim<<" articulos en el deposito "<<depo<<" son: "<<endl;
+                    productos.minStockDeposito(lim,depo-1);
+                }
 
             }else if(argc == 4){
 
                 lim = stoi(argv[2]);
+                cout<<"Los productos cuyo stock es menor o igual a "<<lim<<" articulos son: "<<endl;
                 productos.minStock(lim);
 
             }
@@ -148,7 +129,7 @@ int main(){
 
     double elapsed_secs = static_cast<double>(end-begin) / CLOCKS_PER_SEC;
 
-    cout << "Tiempo transcurrido ---> " << elapsed_secs << " segundos\n" << endl;
+    cout << "\nTiempo transcurrido ---> " << elapsed_secs << " segundos\n" << endl;
 
     return 0;
 }
@@ -202,11 +183,19 @@ void insertRecognitionTree(ArbolProducto& arbol, string nombreArchivo, int& tam)
 
 
         // Las primeras columnas son strings
+        string columna1 = columnas[0]; //COMENTARIO
         string columna2 = columnas[1];
         string columna3 = columnas[2];
 
         // Creamos un objeto de tipo Producto
         Producto nuevoProducto;
+        //if(columa1 != ""){}
+        /*if(columna1 == ""){
+
+        nuevoProducto.grupo = columna1; //SIN USO ACTUALMENTE / COMENTARIO
+
+        }*/
+
         nuevoProducto.codigo = columna2;
         nuevoProducto.nombre = columna3;
 
@@ -243,4 +232,8 @@ void printHelp(){ //LISTA DE COMANDOS
 <<"\n   - `-stock` [nombre_articulo]: El stock total del articulo ingresado como argumento."
 <<"\n   - `-stock_dep` [nombre_articulo],[deposito]: El stock del articulo en un deposito.\n"
 <<"\n";
+}
+
+void menu(int argc, char** argv, int tam){
+    
 }
