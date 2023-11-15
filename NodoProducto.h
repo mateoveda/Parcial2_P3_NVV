@@ -70,7 +70,7 @@ public:
         aux.encolar(auxi);
     }
     while(!aux.esVacia()){
-        dato.depositos.encolar(aux.desencolar());
+      dato.depositos.encolar(aux.desencolar());
     }
     return suma;
   }
@@ -83,10 +83,11 @@ public:
     int posA = 0;
     Cola<int> aux;
     while(!dato.depositos.esVacia()){
-      aux.encolar(dato.depositos.desencolar());
+      int au = dato.depositos.desencolar();
+      aux.encolar(au);
     }
 
-    while (!aux.esVacia() && posA < pos) {
+    while (!aux.esVacia() && posA < pos) { //posA <= pos
         dato.depositos.encolar(aux.desencolar());
         posA++;
     }
@@ -157,12 +158,23 @@ public:
   }
 
   /**
+ * Imprime los datos del nodo.
+ */
+  void printNodoDepo(int n){
+    cout<<"Nombre: "<<this->getNombre()<<"\n";
+    cout<<"Codigo: "<<this->getCodigo()<<"\n";
+    cout<<"Stock total: "<<this->getStocktotal()<<"\n";
+    cout<<"Stock total por deposito "<<n+1<<": "<<this->getStockdeposito(n)<<"\n";  //n-1 tendria que ser n?
+    cout<<"\n";
+  }
+
+  /**
  * Simplemente, suma las colas de dos nodos, 
  * suponiendo que tengan el mismo tamaño.
  */
 
 /*
-  void sumarNodo(Producto d){
+  void sumarNodo(Producto& d){
     Cola<int> aux;
     Cola<int> aux1;
     Cola<int> aux2;
