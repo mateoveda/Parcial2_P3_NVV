@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -15,6 +16,35 @@ void insertRecognitionTree(ArbolProducto& arbol, string nombreArchivo, int& tam)
 //void menu(int argc, char** argv);
 
 int main(int argc, char** argv){
+    clock_t begin;
+    begin = clock();
+
+    cout << "Comenzando a medir Tiempo\n" << endl;
+    //INICIO TIMER
+    
+    /*
+    #include <iostream>
+#include <ctime>
+
+using namespace std;
+
+
+int main(){
+    clock_t begin;
+    begin = clock();
+
+    cout << "Comenzando a medir Tiempo\n" << endl;
+
+    clock_t end = clock();
+
+    double elapsed_secs = static_cast<double>(end-begin) / CLOCKS_PER_SEC;
+
+    cout << "Tiempo transcurrido ---> " << elapsed_secs << " segundos\n" << endl;
+
+    return 0;
+}
+
+    */
     ArbolProducto productos;
     string archivo = argv[argc-1];
     int tamanioArchivo=0;
@@ -24,7 +54,7 @@ int main(int argc, char** argv){
         if(argc==1){
             printHelp();
 
-        }else{cout<<"cantidad de argumentos no valida0\n";}
+        }else{cout<<"cantidad de argumentos no valida\n";}
 
     }else{
 
@@ -90,7 +120,7 @@ int main(int argc, char** argv){
 
                     cout<<"La cantidad de articulos: "
                     <<nombre<<" en el deposito "
-                    <<depo<<" son: "<<productos.ObtenerDeposito(nombre,depo);
+                    <<depo<<" son: "<<productos.ObtenerDeposito(nombre,depo)<<endl;
                     
                     }
 
@@ -111,6 +141,16 @@ int main(int argc, char** argv){
             }
         }else{cout<<"\n\t-- Comando no reconocido --\n\n";}
     }
+    
+    //FIN TIMER
+
+    clock_t end = clock();
+
+    double elapsed_secs = static_cast<double>(end-begin) / CLOCKS_PER_SEC;
+
+    cout << "Tiempo transcurrido ---> " << elapsed_secs << " segundos\n" << endl;
+
+    return 0;
 }
 
 /*
